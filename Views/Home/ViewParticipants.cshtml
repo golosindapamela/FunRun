@@ -1,0 +1,67 @@
+﻿@model List<Fun_Run_Registration.Models.Participant>
+
+@{
+    ViewData["Title"] = "Registered Participants";
+}
+
+<h1 style="font-weight: bold; color: #1e1453;">Registered Participants</h1>
+
+@if (Model.Count > 0)
+{
+    <table class="table table-bordered">
+        <thead class="thead-dark">
+            <tr>
+                <th>Name</th>
+                <th>Age</th>
+                <th>Email</th>
+                <th>Race Distance</th>
+                <th>T-Shirt Size</th>
+                <th>Dog’s Name</th>
+                <th>Dog’s Breed</th>
+                <th>Dog’s Age</th>
+                <th>Payment</th>
+                <th>Actions</th> <!-- Added Actions column -->
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var participant in Model)
+            {
+                <tr>
+                    <td>@participant.Name</td>
+                    <td>@participant.Age</td>
+                    <td>@participant.Email</td>
+                    <td>@participant.Distance</td>
+                    <td>@participant.TShirtSize</td>
+                    <td>@participant.DogsName</td>
+                    <td>@participant.DogsBreed</td>
+                    <td>@(participant.DogsAge.HasValue ? participant.DogsAge.ToString() : "N/A")</td>
+                    <td>@participant.Payment</td>
+                    <td>
+                        <!-- Edit Button (Directs to EditRegistration page) -->
+                        <a class="btn btn-warning btn-sm" href="@Url.Action("EditRegistration", "Home", new { id = participant.Id })" aria-label="Edit participant @participant.Name">Edit</a>
+
+                        <!-- Delete Button with confirmation -->
+                        <button class="btn btn-danger btn-sm" onclick="confirmDelete(@participant.Id)" aria-label="Delete participant @participant.Name">Delete</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <div class="alert alert-info">
+        <p>No participants have registered yet.</p>
+    </div>
+}
+
+<script>
+    // JavaScript function to confirm delete
+    function confirmDelete(participantId) {
+        // Show confirmation dialog
+        if (confirm("Are you sure you want to delete this participant?")) {
+            // Perform deletion by redirecting to the delete action in the controller
+            window.location.href = '@Url.Action("Delete", "Home", new { id = "__ID__" })'.replace("__ID__", participantId);
+        }
+    }
+</script>

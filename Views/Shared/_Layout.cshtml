@@ -1,0 +1,96 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/Fun_Run_Registration.styles.css" asp-append-version="true" />
+    <style>
+        .navbar {
+            background-color: #1e1453;
+        }
+
+            .navbar .nav-link {
+                color: white !important;
+                font-weight: bold;
+            }
+
+                .navbar .nav-link:hover {
+                    color: #0eb9b3 !important;
+                }
+
+        .navbar-collapse {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .navbar-nav {
+            margin-left: auto;
+            display: flex;
+            gap: 20px;
+        }
+
+            .navbar-nav .nav-item {
+                margin-right: 20px;
+            }
+
+        .navbar-brand {
+            margin-right: auto;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light border-bottom box-shadow mb-3">
+            <div class="container-fluid">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
+                    <img src="/images/Longlogo.png" alt="Bark Dash Logo" style="height: 60px;" />
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse"
+                        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link @(ViewData["Title"] != null && ViewData["Title"].ToString() == "Home Page" ? "active" : "")"
+                               asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link @(ViewData["Title"] != null && ViewData["Title"].ToString() == "RaceInfo" ? "active" : "")"
+                               asp-area="" asp-controller="Home" asp-action="RaceInfo">Race Info</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link @(ViewData["Title"] != null && ViewData["Title"].ToString() == "Register" ? "active" : "")"
+                               asp-area="" asp-controller="Home" asp-action="Register">Register</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link @(ViewData["Title"] != null && ViewData["Title"].ToString() == "ViewParticipants" ? "active" : "")"
+                               asp-area="" asp-controller="Home" asp-action="ViewParticipants">View Participants</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link @(ViewData["Title"] != null && ViewData["Title"].ToString() == "Privacy" ? "active" : "")"
+                               asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+    <footer class="border-top footer text-muted">
+        <div class="container text-center">
+            <p>&copy; 2025 The Bark Dash | Your ultimate dog-friendly race experience!</p>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

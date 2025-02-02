@@ -1,0 +1,161 @@
+﻿@model Fun_Run_Registration.Models.Participant
+
+@{
+    ViewData["Title"] = "Edit Registration";
+}
+
+<h1 style="font-weight: bold; color: #1e1453;">@ViewData["Title"]</h1><br />
+
+<form action="/home/Edit" method="post" onsubmit="return validateForm()">
+    <input type="hidden" name="Id" value="@Model.Id" />
+    <!-- Event Options -->
+    <h2 style="color: #1e1453;">Event Options</h2>
+
+    <div class="form-group">
+        <label for="distance">Race Distance:</label><br>
+        <input type="radio" id="5k" name="Distance" value="5K Challenge" class="form-check-input"
+        @(Model.Distance == "5K Challenge" ? "checked" : "") required />
+        <label for="5k">5K Challenge - ₱1000 (Running Shirt Included)</label><br>
+
+        <input type="radio" id="3k" name="Distance" value="3K Challenge" class="form-check-input"
+        @(Model.Distance == "3K Challenge" ? "checked" : "") required />
+        <label for="3k">3K Challenge - ₱900 (Running Shirt Included)</label><br>
+
+        <input type="radio" id="human-run" name="Distance" value="Human Run (without dog)" class="form-check-input"
+        @(Model.Distance == "Human Run (without dog)" ? "checked" : "") required />
+        <label for="human-run">Human Run (Without Dog) - ₱650 (Running Shirt Included)</label><br><br>
+    </div>
+
+    <!-- Participant Information -->
+    <h2 style="color: #1e1453;">Participant Information</h2>
+
+    <div class="form-group">
+        <label for="fullname">Full Name:</label>
+        <input name="Name" id="fullname" type="text" class="form-control" value="@Model.Name" required />
+    </div><br>
+
+    <div class="form-group">
+        <label for="age">Age:</label>
+        <input name="Age" id="age" type="text" class="form-control" value="@Model.Age" required />
+    </div><br>
+
+    <div class="form-group">
+        <label for="email">Email Address:</label>
+        <input name="Email" id="email" type="email" class="form-control" value="@Model.Email" required />
+    </div><br>
+
+    <h2 style="color: #1e1453;">T-Shirt Size:</h2>
+    <div class="form-group">
+        <label for="tshirt">T-Shirt Size:</label>
+        <select asp-for="TShirtSize" class="form-control" required>
+            <option value="Small" selected="@(Model.TShirtSize == "Small" ? "selected" : null)">Small</option>
+            <option value="Medium" selected="@(Model.TShirtSize == "Medium" ? "selected" : null)">Medium</option>
+            <option value="Large" selected="@(Model.TShirtSize == "Large" ? "selected" : null)">Large</option>
+            <option value="Extra Large" selected="@(Model.TShirtSize == "Extra Large" ? "selected" : null)">Extra Large</option>
+            <option value="XX Large" selected="@(Model.TShirtSize == "XX Large" ? "selected" : null)">XX Large</option>
+        </select>
+    </div><br>
+
+    <!-- Dog Information -->
+    <h2 style="color: #1e1453;">Dog Information</h2>
+
+    <div class="form-group">
+        <label for="dogname">Dog’s Name:</label>
+        <input name="DogsName" id="dogname" type="text" class="form-control" value="@Model.DogsName" required />
+    </div><br>
+
+    <div class="form-group">
+        <label for="dogbreed">Dog’s Breed:</label>
+        <input name="DogsBreed" id="dogbreed" type="text" class="form-control" value="@Model.DogsBreed" required />
+    </div><br>
+
+    <div class="form-group">
+        <label for="dogage">Dog’s Age:</label>
+        <input name="DogsAge" id="dogage" type="text" class="form-control" value="@Model.DogsAge" required />
+    </div><br>
+
+    <!-- Payment Options -->
+    <h2 style="color: #1e1453;">Payment Information</h2>
+
+    <div class="form-group">
+        <label>Select Payment Method:</label><br>
+        <input type="radio" id="credit-card" name="Payment" value="Credit Card" class="form-check-input"
+        @(Model.Payment == "Credit Card" ? "checked" : "") required />
+        <label for="credit-card">Credit/Debit Card</label><br>
+
+        <input type="radio" id="gcash" name="Payment" value="GCash" class="form-check-input"
+        @(Model.Payment == "GCash" ? "checked" : "") required />
+        <label for="gcash">GCash</label><br><br>
+    </div>
+
+    <!-- Buttons -->
+    <button type="submit" class="btn btn-primary">Save Changes</button>
+    <a href="@Url.Action("ViewParticipants", "Home")" class="btn btn-secondary">Cancel</a>
+</form>
+
+<script>
+    function validateForm() {
+        let selectedEvent = document.querySelector('input[name="Distance"]:checked');
+        let ageField = document.getElementById("age");
+        let dogAgeField = document.getElementById("dogage");
+        let paymentMethod = document.querySelector('input[name="Payment"]:checked');
+
+        if (!selectedEvent) {
+            alert("Please select an event option.");
+            return false;
+        }
+
+        let isChallengeEvent = selectedEvent.value === "5K Challenge" || selectedEvent.value === "3K Challenge";
+        let isHumanRun = selectedEvent.value === "Human Run (without dog)";
+
+        let requiredFields = ["fullname", "age", "email", "tshirt"];
+        if (isChallengeEvent) {
+            requiredFields.push("dogname", "dogbreed", "dogage");
+        }
+
+        for (let field of requiredFields) {
+            let input = document.getElementById(field);
+            if (input && input.value.trim() === "" && !input.disabled) {
+                alert("Please fill in all required fields.");
+                return false;
+            }
+        }
+
+        // Validate numeric fields
+        if (!/^\d+$/.test(ageField.value)) {
+            alert("Age must be a number.");
+            return false;
+        }
+
+        if (!isHumanRun && dogAgeField.value !== "" && !/^\d+$/.test(dogAgeField.value)) {
+            alert("Dog's age must be a number.");
+            return false;
+        }
+
+        // Validate payment method
+        if (!paymentMethod) {
+            alert("Please select a payment method.");
+            return false;
+        }
+
+        return true;
+    }
+
+    // Add event listeners to the event options
+    document.querySelectorAll('input[name="Distance"]').forEach(function(radio) {
+        radio.addEventListener('change', function() {
+            let isHumanRun = this.value === "Human Run (without dog)";
+            let dogFields = ["dogname", "dogbreed", "dogage"];
+
+            dogFields.forEach(function(fieldId) {
+                let field = document.getElementById(fieldId);
+                if (field) {
+                    field.required = !isHumanRun;
+                    if (isHumanRun) {
+                        field.value = ""; // Clear the field
+                    }
+                }
+            });
+        });
+    });
+</script>

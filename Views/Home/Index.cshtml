@@ -1,0 +1,92 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<style>
+    .bark-dash-title, .event-details-title, .countdown-title {
+        color: #1e1453;
+        font-weight: bold;
+    }
+
+    .btn-register-now {
+        background-color: #61a1fe;
+        color: white;
+    }
+
+        .btn-register-now:hover {
+            background-color: #0b5ed7;
+            color: white;
+        }
+
+    .container .row h4 {
+        color: #1e1453;
+    }
+</style>
+
+
+<div class="text-center">
+    <h1 class="display-4 bark-dash-title">The Bark Dash: <br> A Fun Run for You and Your Furry Friend!</h1>
+    <p class="lead">
+        Calling all dog lovers and their wagging companions! Join us for <span class="bark-dash-title">The Bark Dash</span>, a paws-itively fun-filled run where you <br>
+        and your pup can jog, trot, or sprint toward the finish line. Whether you're aiming for a personal best or just out for <br>
+        a fun stroll, this event is all about celebrating the bond between humans and their four-legged friends.
+    </p>
+    <img src="~/images/banner.png" alt="Bark Dash Logo" class="img-fluid mb-4" />
+</div>
+
+<!-- Countdown Timer -->
+<div class="text-center mt-3">
+    <h2 class="countdown-title">Countdown to the Big Day</h2>
+    <div id="countdown" style="font-size: 2rem; font-weight: bold;"></div>
+</div>
+
+<!-- JavaScript for Countdown Timer -->
+<script>
+    // Define the event date and time in local time format.
+    const eventDate = new Date("2025-03-29T05:20:00").getTime();
+
+    const countdownFunction = setInterval(function () {
+        const now = new Date().getTime();
+        const distance = eventDate - now;
+
+        // If the countdown is over, display a message.
+        if (distance < 0) {
+            clearInterval(countdownFunction);
+            document.getElementById("countdown").innerHTML = "The Bark Dash is Happening Now!";
+        } else {
+            // Calculate the time remaining.
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            // Update the countdown display.
+            document.getElementById("countdown").innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+        }
+    }, 1000);
+</script>
+
+<!-- Event Details Section -->
+<div class="container mt-5">
+    <h2 class="text-center event-details-title">Event Details</h2><br>
+    <div class="row text-center">
+        <div class="col-md-4">
+            <h4>Date</h4>
+            <p>Saturday, March 29, 2025</p>
+        </div>
+        <div class="col-md-4">
+            <h4>Location</h4>
+            <p>SM by the Bay</p>
+        </div>
+        <div class="col-md-4">
+            <h4>Distance</h4>
+            <p>3k and 5K Challenge</p>
+        </div>
+    </div>
+</div>
+
+<!-- Call to Action -->
+<div class="text-center mt-5">
+    <a href="/Home/Register" class="btn btn-register-now btn-lg" alt="Register Now for the Bark Dash">Register Now</a>
+    <a href="/Home/RaceInfo" class="btn btn-outline-secondary btn-lg" alt="Learn more about the Bark Dash event">Learn More</a>
+</div>

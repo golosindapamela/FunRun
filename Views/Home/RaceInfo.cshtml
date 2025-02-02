@@ -1,0 +1,91 @@
+﻿@{
+    ViewData["Title"] = "Race Info";
+}
+
+<style>
+    .btn-register-now {
+        background-color: #61a1fe;
+        color: white;
+    }
+
+        .btn-register-now:hover {
+            background-color: #0b5ed7;
+            color: white;
+        }
+</style>
+
+<div class="container mt-5">
+    <h1 class="text-center" style="color: #1e1453; font-weight: bold;">Race Information</h1>
+    <p class="lead text-center">
+        Get all the details about The Bark Dash and prepare for an unforgettable day with your furry friend!
+    </p>
+
+    <!-- Event Overview -->
+    <div class="mt-4">
+        <h2 style="color: #1e1453; font-weight: bold;">Event Overview</h2>
+        <p>
+            <strong> The Bark Dash </strong> is a fun and family-friendly event designed for dog lovers and their four-legged companions. Whether you're a seasoned runner or just looking for a casual stroll with your pup, this event has something for everyone.
+        </p>
+    </div>
+
+    <!-- Race Details -->
+    <div class="mt-4">
+        <h2 style="color: #1e1453; font-weight: bold;">Race Details</h2>
+        <ul>
+            <li><strong>Date:</strong> Saturday, March 29, 2025</li>
+            <li><strong>Time:</strong> 5:20 AM</li>
+            <li><strong>Location:</strong> SM by the Bay</li>
+            <li>
+                <strong>Race Options:</strong>
+                <ul>
+                    <li>3K Challenge - ₱900 (Running Shirt Included)</li>
+                    <li>5K Challenge - ₱1000 (Running Shirt Included)</li>
+                    <li>Human Run (Without Dog) - ₱650 (Running Shirt Included)</li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Route Map -->
+    <div class="mt-4">
+        <h2 style="color: #1e1453; font-weight: bold;">Route Map</h2>
+        <p class="text-center">
+            <strong style="color: #1e1453; font-weight: bold; font-size: 24px;">3K Race Route Map</strong>
+        </p>
+        <img src="~/images/3k_map.jpg" alt="3K Race Route Map" class="img-fluid rounded">
+        <p class="text-center" style="margin-top: 20px;">
+            <strong style="color: #1e1453; font-weight: bold; font-size: 24px;">5K Race Route Map</strong>
+        </p>
+        <img src="~/images/route-map.jpg" alt="5K Race Route Map" class="img-fluid rounded" />
+    </div>
+
+    <!-- What to Bring -->
+    <div class="mt-4">
+        <h2 style="color: #1e1453; font-weight: bold;">What to Bring</h2>
+        <ul>
+            <li>A leash for your dog (non-retractable, 6 feet or shorter).</li>
+            <li>Comfortable running or walking shoes.</li>
+            <li>A water bottle for yourself (hydration stations will be available for dogs and humans).</li>
+            <li>Your dog's vaccination records (if requested at check-in).</li>
+        </ul>
+    </div>
+
+    <!-- Safety Guidelines -->
+    <div class="mt-4">
+        <h2 style="color: #1e1453; font-weight: bold;">Safety Guidelines</h2>
+        <p>
+            The safety of all participants—both human and canine—is our top priority. Please follow these guidelines:
+        </p>
+        <ul>
+            <li>All dogs must be on a leash at all times.</li>
+            <li>Ensure your dog is comfortable in crowds and around other dogs.</li>
+            <li>Pick up after your dog (waste bags will be provided).</li>
+            <li>Do not participate if your dog is sick or injured.</li>
+        </ul>
+    </div>
+
+    <!-- Call to Action -->
+    <div class="text-center mt-5">
+        <a href="/Home/Register" class="btn btn-lg btn-register-now" alt="Register Now for the Bark Dash">Register Now</a>
+    </div>
+</div>
